@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sign_in_title_font_size">50sp</dimen>
+    <dimen name="sign_in_title_margin_top">50dp</dimen>
+    <dimen name="sign_in_item_font_size">20sp</dimen>
+    <dimen name="sign_in_activity_item_margin_top">10dp</dimen>
+</resources>

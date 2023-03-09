@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register"
+    android:background="@mipmap/signinbg">
+
+    <TextView
+        android:id="@+id/tv_signin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textSize="@dimen/sign_in_title_font_size"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/sign_in_title_margin_top"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_signin_text"
+        android:padding="40dp"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户名"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/sign_in_item_font_size" />
+
+            <EditText
+                android:id="@+id/edit_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入用户名"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/sign_in_item_font_size"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:hint="请输入密码"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
+                tools:ignore="Deprecated" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认密码"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/sign_in_item_font_size"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+            <EditText
+                android:id="@+id/edit_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:hint="请再次输入密码"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
+                tools:ignore="Deprecated" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/sign_in_item_font_size"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+            <EditText
+                android:id="@+id/edit_phone_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:hint="请输入手机号"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
+                tools:ignore="Deprecated" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="验证码"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/sign_in_item_font_size"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+            <EditText
+                android:id="@+id/edit_check_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:password="true"
+                android:hint="请输入收到的验证码"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
+                tools:ignore="Deprecated" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="注册"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_corner_shape"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已有账户？"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:id="@+id/tv_goto_signin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="立即登录"
+                    android:textColor="@color/theme_blue"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
