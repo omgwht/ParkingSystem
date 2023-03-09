@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(localIntent);//执行
             }
         };
-        timer.schedule(tast,DELAY);//10秒后
+        timer.schedule(tast,DELAY);//2秒后
     }
 }

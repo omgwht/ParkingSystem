@@ -44,7 +44,8 @@
                 android:hint="请输入用户名"
                 android:textColorHint="@color/gray"
                 android:textColor="@color/black"
-                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"/>
+                android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
+                android:background="@drawable/bottom_line_shape"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +62,8 @@
                 android:textColorHint="@color/gray"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
-                tools:ignore="Deprecated" />
+                tools:ignore="Deprecated"
+                android:background="@drawable/bottom_line_shape"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +80,8 @@
                 android:textColorHint="@color/gray"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
-                tools:ignore="Deprecated" />
+                tools:ignore="Deprecated"
+                android:background="@drawable/bottom_line_shape"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,7 +98,8 @@
                 android:textColorHint="@color/gray"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
-                tools:ignore="Deprecated" />
+                tools:ignore="Deprecated"
+                android:background="@drawable/bottom_line_shape"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,7 +116,8 @@
                 android:textColorHint="@color/gray"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/sign_in_activity_item_margin_top"
-                tools:ignore="Deprecated" />
+                tools:ignore="Deprecated"
+                android:background="@drawable/bottom_line_shape"/>
 
             <Button
                 android:id="@+id/btn_register"
