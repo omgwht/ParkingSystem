@@ -71,6 +71,8 @@ public class signin extends AppCompatActivity implements View.OnClickListener {
                         connection = conn.getConnection();
                         if(connection){
                             Log.d("SUCCESS","连接成功");
+                        }else{
+                            Toast.makeText(this,"数据库连接失败",Toast.LENGTH_SHORT).show();
                         }
                     } catch (ClassNotFoundException e) {
                         Log.d("ERROR","ClassNotFound错误"+e.toString());
