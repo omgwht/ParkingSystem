@@ -7,4 +7,5 @@
         <item name="colorControlNormal">@color/dark_gray</item>
         <item name="colorControlActivated">@color/teal_700</item>
     </style>
+
 </resources>

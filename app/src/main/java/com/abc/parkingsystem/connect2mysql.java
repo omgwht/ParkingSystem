@@ -45,4 +45,23 @@ public class connect2mysql {
             return false;
         }
     }
+
+    public ParkingInfoDoubleArray getSearchParkingResult(String sql) throws SQLException {
+        Statement pstmt = connection.createStatement();
+        ResultSet rs = pstmt.executeQuery(sql);
+        int parkinglot_num = 0;
+        while(rs.next()){
+            parkinglot_num++;
+        }
+        String[] parkinglot_name_arr = new String[parkinglot_num];
+        String[] parkinglot_position_arr = new String[parkinglot_num];
+        rs = pstmt.executeQuery(sql);
+        for(int i = 0; rs.next(); i++){
+            parkinglot_name_arr[i] = rs.getString("parkinglot_name");
+            parkinglot_position_arr[i] = rs.getString("parkinglot_position");
+        }
+        ParkingInfoDoubleArray pkd_arr = new ParkingInfoDoubleArray(parkinglot_name_arr,parkinglot_position_arr);
+        return pkd_arr;
+    }
+
 }

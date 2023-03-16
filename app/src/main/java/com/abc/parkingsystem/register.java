@@ -3,9 +3,11 @@ package com.abc.parkingsystem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        setStatusBar();
 
         goto_next = findViewById(R.id.btn_register);
         goto_next.setOnClickListener(this);
@@ -42,6 +45,20 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         go_back_to_signin = findViewById(R.id.tv_goto_signin);
         go_back_to_signin.setOnClickListener(this);
     }
+
+//    protected void setStatusBar() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//隐藏状态栏但不隐藏状态栏字体
+//            //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏，并且不显示字体
+//            //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏文字颜色为暗色
+//        }
+//    }
+protected void setStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        getWindow().setStatusBarColor(getResources().getColor(R.color.theme_blue));//设置状态栏颜色
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为暗色
+    }
+}
 
     @Override
     public void onClick(View view) {
@@ -64,9 +81,13 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                         try {
                             conn = new connect2mysql();
                             connection = conn.getConnection();
-                            boolean register_flag = conn.insertToDB(insert_sql);
-                            if(register_flag){
-                                Toast.makeText(this,"注册成功！",Toast.LENGTH_LONG).show();
+                            if(connection){
+                                boolean register_flag = conn.insertToDB(insert_sql);
+                                if(register_flag){
+                                    Toast.makeText(this,"注册成功！",Toast.LENGTH_LONG).show();
+                                }
+                            }else{
+                                Toast.makeText(this,"数据库连接失败",Toast.LENGTH_SHORT).show();
                             }
                         } catch (SQLException e) {
                             Log.d("ERROR",e.toString());
@@ -80,6 +101,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
             case R.id.tv_goto_signin:
                 Intent intent = new Intent(this,signin.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
