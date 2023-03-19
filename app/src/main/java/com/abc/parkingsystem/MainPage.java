@@ -1,6 +1,7 @@
 package com.abc.parkingsystem;
 
 
+import androidx.annotation.ContentView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -8,10 +9,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +32,9 @@ public class MainPage extends AppCompatActivity {
     private connect2mysql conn;
     private String[] titles;
     private String[] positions;
+    private PopupWindow mpopwindow;
+    private TextView tv_pkl_name;
+    private TextView tv_pkl_position;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -58,7 +67,7 @@ public class MainPage extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
                 if (!TextUtils.isEmpty(s)){
-                    String sql = "SELECT * FROM parkinglot_info WHERE parkinglot_name LIKE '%"+s+"%'";
+                    String sql = "SELECT * FROM parkinglot_info WHERE parkinglot_name LIKE '%"+s+"%' OR parkinglot_position LIKE '%"+s+"%'";
                     try {
                         ParkingInfoDoubleArray parkingInfoDoubleArray = conn.getSearchParkingResult(sql);
                         titles = parkingInfoDoubleArray.getNameArray();
@@ -66,6 +75,19 @@ public class MainPage extends AppCompatActivity {
                         mlistview = findViewById(R.id.mlistView);
                         MyBaseAdapter mAdapter = new MyBaseAdapter();
                         mlistview.setAdapter(mAdapter);
+                        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            // 点击搜索出来的项后，弹出PopUpWindow进行下一步选择
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                // i为点击项的position
+                                switch (i){
+                                    default:
+                                        String pkl_name_str = (String) adapterView.getItemAtPosition(i); //获取了停车场的名字
+                                        String pkl_position_str = positions[i]; //获取了停车场的定位
+                                        showPopUpWindow(pkl_name_str,pkl_position_str);
+                                }
+                            }
+                        });
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -78,6 +100,27 @@ public class MainPage extends AppCompatActivity {
 //        mlistview = findViewById(R.id.mlistView);
 //        MyBaseAdapter mAdapter = new MyBaseAdapter();
 //        mlistview.setAdapter(mAdapter);
+    }
+
+    private void showPopUpWindow(String pkl_name, String pkl_position){
+        View contentview = LayoutInflater.from(MainPage.this).inflate(R.layout.parkinginfo_popupwindow,null);
+        mpopwindow = new PopupWindow(contentview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
+        mpopwindow.setContentView(contentview);
+        tv_pkl_name = (TextView) contentview.findViewById(R.id.tv_show_pkl_name);
+        tv_pkl_position = (TextView) contentview.findViewById(R.id.tv_show_pkl_position);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        Button btn_book_now = (Button) contentview.findViewById(R.id.btn_book_now);
+        // 立即预定按钮的点击事件，携带数据跳转到下一页
+        btn_book_now.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        tv_pkl_name.setText(pkl_name);
+        tv_pkl_position.setText(pkl_position);
+        View rootview = LayoutInflater.from(MainPage.this).inflate(R.layout.activity_main_page,null);
+        mpopwindow.showAtLocation(rootview, Gravity.BOTTOM,0,0);
     }
 
     protected void setStatusBar() {
