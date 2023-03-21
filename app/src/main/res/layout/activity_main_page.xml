@@ -7,24 +7,110 @@
     tools:context=".MainPage"
     android:orientation="vertical"
     android:background="@mipmap/mainpagebg">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="20dp">
         <SearchView
             android:id="@+id/msearchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:iconifiedByDefault="false"
             android:queryHint="搜索附近停车场"
             android:background="@color/theme_blue"/>
+        <ListView
+            android:id="@+id/mlistView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/msearchView"
+            android:layout_marginTop="40dp"
+            android:layout_weight="2"/>
+        <ImageButton
+            android:id="@+id/ibtn_pk1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/locationicon"
+            android:scaleType="fitXY"
+            android:layout_alignTop="@+id/msearchView"
+            tools:ignore="NotSibling"
+            android:layout_marginTop="130dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:background="#00000000" />
+        <ImageButton
+            android:id="@+id/ibtn_pk2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/locationicon"
+            android:scaleType="fitXY"
+            android:layout_alignTop="@+id/msearchView"
+            tools:ignore="NotSibling"
+            android:layout_marginTop="160dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:background="#00000000" />
+        <RelativeLayout
+            android:id="@+id/re_layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/main_page_bottom_corner_bg"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp">
+            <ImageButton
+                android:id="@+id/ibtn_bottom_1"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/main_page_bottom_btn"
+                android:src="@mipmap/bottom_01"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="13dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp" />
+            <ImageButton
+                android:id="@+id/ibtn_bottom_2"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/main_page_bottom_btn"
+                android:src="@mipmap/buttom_02"
+                android:layout_alignLeft="@+id/ibtn_bottom_1"
+                android:layout_marginLeft="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"/>
+            <ImageButton
+                android:id="@+id/ibtn_bottom_3"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/main_page_bottom_btn"
+                android:src="@mipmap/bottom_03"
+                android:layout_alignLeft="@+id/ibtn_bottom_2"
+                android:layout_marginLeft="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"/>
+            <ImageButton
+                android:id="@+id/ibtn_bottom_4"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/main_page_bottom_btn"
+                android:src="@mipmap/bottom_04"
+                android:layout_alignLeft="@+id/ibtn_bottom_3"
+                android:layout_marginLeft="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"/>
+        </RelativeLayout>
     </RelativeLayout>
-    <ListView
-        android:id="@+id/mlistView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
 
 </LinearLayout>
