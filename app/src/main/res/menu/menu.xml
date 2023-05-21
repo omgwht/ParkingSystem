@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ibtn_bottom_1"
+        android:icon="@mipmap/bottom_01"
+        android:title="首页"/>
+    <item
+        android:id="@+id/ibtn_bottom_2"
+        android:icon="@mipmap/buttom_02"
+        android:title="消息"/>
+    <item
+        android:id="@+id/ibtn_bottom_3"
+        android:icon="@mipmap/bottom_03"
+        android:title="历史"/>
+    <item
+        android:id="@+id/ibtn_bottom_4"
+        android:icon="@mipmap/bottom_04"
+        android:title="我的"/>
+</menu>

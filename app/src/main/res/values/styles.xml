@@ -8,4 +8,9 @@
         <item name="colorControlActivated">@color/teal_700</item>
     </style>
 
+    <style name="popupwindowStyle">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
+
 </resources>

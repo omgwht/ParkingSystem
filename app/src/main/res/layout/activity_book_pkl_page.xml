@@ -38,53 +38,51 @@
             android:layout_height="wrap_content"
             android:background="@drawable/top_line_shape"
             android:layout_alignTop="@+id/tv_show_remain_num"
-            android:layout_marginTop="45dp">
-            <GridLayout
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp">
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="4">
+                android:layout_height="wrap_content">
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:rowCount="4">
+                    <ImageView
+                        android:id="@+id/iv_pkp_0"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                    <ImageView
+                        android:id="@+id/iv_pkp_1"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                    <ImageView
+                        android:id="@+id/iv_pkp_2"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                    <ImageView
+                        android:id="@+id/iv_pkp_3"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                    <ImageView
+                        android:id="@+id/iv_pkp_4"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                    <ImageView
+                        android:id="@+id/iv_pkp_5"
+                        android:layout_width="80dp"
+                        android:layout_height="250dp"
+                        android:layout_columnWeight="1" />
+                </GridLayout>
+            </ScrollView>
 
-            </GridLayout>
         </RelativeLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
-<!--            <Button-->
-<!--                android:id="@+id/btn_floor_1"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="1层"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:background="@drawable/floor_byn_style"-->
-<!--                android:layout_alignTop="@+id/tv_pkl_name"-->
-<!--                android:layout_marginTop="90dp"-->
-<!--                android:layout_alignParentLeft="true"-->
-<!--                android:layout_marginLeft="20dp"/>-->
-<!--            <Button-->
-<!--                android:id="@+id/btn_floor_2"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="2层"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:background="@drawable/floor_byn_style"-->
-<!--                android:layout_alignTop="@+id/tv_pkl_name"-->
-<!--                android:layout_marginTop="90dp"-->
-<!--                android:layout_marginLeft="30dp"/>-->
-<!--            <Button-->
-<!--                android:id="@+id/btn_floor_3"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="3层"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:background="@drawable/floor_byn_style"-->
-<!--                android:layout_alignTop="@+id/tv_pkl_name"-->
-<!--                android:layout_marginTop="90dp"-->
-<!--                android:layout_marginLeft="30dp"/>-->
-<!--        </LinearLayout>-->
+
     </RelativeLayout>
 </LinearLayout>

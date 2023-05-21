@@ -2,9 +2,11 @@ package com.abc.parkingsystem;
 
 
 import androidx.annotation.ContentView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +15,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,9 +30,18 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.Marker;
+import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps2d.model.MyLocationStyle;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 import java.sql.SQLException;
 
-public class MainPage extends AppCompatActivity implements View.OnClickListener{
+public class MainPage extends AppCompatActivity{
 
     private ListView mlistview;
     private SearchView msearchview;
@@ -39,13 +52,13 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
     private PopupWindow mpopwindow;
     private TextView tv_pkl_name;
     private TextView tv_pkl_position;
-    private ImageButton ibtn_pkl_1;
-    private ImageButton ibtn_pkl_2;
     private RelativeLayout re_layout_bottom;
-    private ImageButton bottom_btn_1;
-    private ImageButton bottom_btn_2;
-    private ImageButton bottom_btn_3;
-    private ImageButton bottom_btn_4;
+    private MenuItem bottom_btn_1;
+    private MenuItem bottom_btn_2;
+    private MenuItem bottom_btn_3;
+    private MenuItem bottom_btn_4;
+    private TextView tv_show_pkl_remain;
+    private BottomNavigationView bottomNavigationView;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -53,16 +66,51 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         setStatusBar();
-        ibtn_pkl_1 = findViewById(R.id.ibtn_pk1);
-        ibtn_pkl_2 = findViewById(R.id.ibtn_pk2);
         re_layout_bottom = (RelativeLayout) findViewById(R.id.re_layout_bottom);
+
+        bottomNavigationView = findViewById(R.id.btnNavView);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.ibtn_bottom_1:
+                        Log.i("INFO","底部导航栏1点击成功");
+                        return true;
+                    case R.id.ibtn_bottom_2:
+                        Log.i("INFO","底部导航栏2点击成功");
+                        return true;
+                    case R.id.ibtn_bottom_3:
+                        Log.i("INFO","底部导航栏3点击成功");
+                        return true;
+                    case R.id.ibtn_bottom_4:
+                        Log.i("INFO","底部导航栏4点击成功");
+                        return true;
+                }
+                return false;
+            }
+        });
         // 设置底部第一个按钮选中状态
-        bottom_btn_1 = findViewById(R.id.ibtn_bottom_1);
-        bottom_btn_2 = findViewById(R.id.ibtn_bottom_2);
-        bottom_btn_3 = findViewById(R.id.ibtn_bottom_3);
-        bottom_btn_4 = findViewById(R.id.ibtn_bottom_4);
-        bottom_btn_1.setPressed(true);
-        bottom_btn_1.setClickable(false);
+//        bottom_btn_1 = findViewById(R.id.ibtn_bottom_1);
+//        bottom_btn_2 = findViewById(R.id.ibtn_bottom_2);
+//        bottom_btn_3 = findViewById(R.id.ibtn_bottom_3);
+//        bottom_btn_4 = findViewById(R.id.ibtn_bottom_4);
+//        bottom_btn_1.setPressed(true);
+//        bottom_btn_1.setOnClickListener(this);
+//        bottom_btn_2.setOnClickListener(this);
+//        bottom_btn_3.setOnClickListener(this);
+//        bottom_btn_4.setOnClickListener(this);
+        MapView mapView = (MapView) findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);// 此方法必须重写
+        AMap aMap = mapView.getMap();
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        myLocationStyle.showMyLocation(true);
+        myLocationStyle.interval(2000);
+        aMap.setMyLocationStyle(myLocationStyle);
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+        aMap.setMyLocationEnabled(true);
+        LatLng latLng = new LatLng(39.906901,116.397972);
+
+        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("Mine0停车场").snippet("北京市西城区西长安街1号"));
         try {
             String sql = "SELECT * FROM parkinglot_info";
             conn = new connect2mysql();
@@ -93,12 +141,15 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
                         ParkingInfoDoubleArray parkingInfoDoubleArray = conn.getSearchParkingResult(sql);
                         titles = parkingInfoDoubleArray.getNameArray();
                         positions = parkingInfoDoubleArray.getPositionArray();
+
                         mlistview = findViewById(R.id.mlistView);
                         MyBaseAdapter mAdapter = new MyBaseAdapter();
                         mlistview.setAdapter(mAdapter);
-                        ibtn_pkl_1.setVisibility(View.INVISIBLE);
-                        ibtn_pkl_2.setVisibility(View.INVISIBLE);
+                        mapView.setVisibility(View.INVISIBLE);
                         mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            private int pkp_remain_num;
+
                             // 点击搜索出来的项后，弹出PopUpWindow进行下一步选择
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,8 +157,18 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
                                 switch (i){
                                     default:
                                         String pkl_name_str = (String) adapterView.getItemAtPosition(i); //获取了停车场的名字
+                                        try {
+                                            pkp_remain_num = conn.getPkpRemainNum("SELECT COUNT(*) FROM parkingport_info WHERE pkl_name='"+pkl_name_str+"' AND pkp_state=0");
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
                                         String pkl_position_str = positions[i]; //获取了停车场的定位
-                                        showPopUpWindow(pkl_name_str,pkl_position_str);
+
+                                        Boolean show_popup_state = showPopUpWindow(pkl_name_str,pkl_position_str,pkp_remain_num);
+                                        if(show_popup_state){
+                                            msearchview.clearFocus();
+//                                            bottom_btn_1.setPressed(true);
+                                        }
                                 }
                             }
                         });
@@ -115,60 +176,38 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
                         Log.d("ERROR","错误信息："+e.toString());
                     }
                 }else{
-                    ibtn_pkl_1.setVisibility(View.VISIBLE);
-                    ibtn_pkl_2.setVisibility(View.VISIBLE);
+                    mapView.setVisibility(View.VISIBLE);
                     mlistview.setAdapter(null);
+                    msearchview.clearFocus();
+//                    bottom_btn_1.setPressed(true);
                 }
                 return false;
             }
         });
 
-        ibtn_pkl_1.setOnClickListener(this);
-        ibtn_pkl_2.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.ibtn_pk1:
-                String sql1 = "SELECT * FROM parkinglot_info WHERE parkinglot_name LIKE '%1%'";
-                try {
-                    ParkingInfoDoubleArray pkdarr = conn.getSearchParkingResult(sql1);
-                    String[] pkl1_name = pkdarr.getNameArray();
-                    String[] pk1_position = pkdarr.getPositionArray();
-                    showPopUpWindow(pkl1_name[0],pk1_position[0]);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.ibtn_pk2:
-                String sql2 = "SELECT * FROM parkinglot_info WHERE parkinglot_name LIKE '%2%'";
-                try {
-                    ParkingInfoDoubleArray pkdarr2 = conn.getSearchParkingResult(sql2);
-                    String[] pkl2_name = pkdarr2.getNameArray();
-                    String[] pkl2_position = pkdarr2.getPositionArray();
-                    showPopUpWindow(pkl2_name[0],pkl2_position[0]);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.ibtn_bottom_1:
-                break;
-            case R.id.ibtn_bottom_2:
-                break;
-            case R.id.ibtn_bottom_3:
-                break;
-            case R.id.ibtn_bottom_4:
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+////        switch (view.getId()){
+////            case R.id.ibtn_bottom_1:
+////                break;
+////            case R.id.ibtn_bottom_2:
+////                break;
+////            case R.id.ibtn_bottom_3:
+////                break;
+////            case R.id.ibtn_bottom_4:
+////                break;
+//        }
+//    }
 
-    private void showPopUpWindow(String pkl_name, String pkl_position){
+    private boolean showPopUpWindow(String pkl_name, String pkl_position,int remain_num){
         View contentview = LayoutInflater.from(MainPage.this).inflate(R.layout.parkinginfo_popupwindow,null);
         mpopwindow = new PopupWindow(contentview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
         mpopwindow.setContentView(contentview);
         tv_pkl_name = (TextView) contentview.findViewById(R.id.tv_show_pkl_name);
         tv_pkl_position = (TextView) contentview.findViewById(R.id.tv_show_pkl_position);
+        tv_show_pkl_remain = (TextView) contentview.findViewById(R.id.tv_show_pkl_remain);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         Button btn_book_now = (Button) contentview.findViewById(R.id.btn_book_now);
         // 立即预定按钮的点击事件，携带数据跳转到下一页
@@ -185,8 +224,11 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener{
         });
         tv_pkl_name.setText(pkl_name);
         tv_pkl_position.setText(pkl_position);
+        tv_show_pkl_remain.setText("剩余"+remain_num+"个");
         View rootview = LayoutInflater.from(MainPage.this).inflate(R.layout.activity_main_page,null);
+        mpopwindow.setAnimationStyle(R.style.popupwindowStyle);
         mpopwindow.showAtLocation(rootview, Gravity.BOTTOM,0,0);
+        return true;
     }
 
     protected void setStatusBar() {
