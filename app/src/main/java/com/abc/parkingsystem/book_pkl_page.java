@@ -3,6 +3,7 @@ package com.abc.parkingsystem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class book_pkl_page extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,6 +35,7 @@ public class book_pkl_page extends AppCompatActivity implements View.OnClickList
     private String pkl_name;
     private TextView tv_show_remain_num;
     private ImageView[] iv_arr;
+    private String pkl_position;
 
     @SuppressLint({"ResourceAsColor", "UseCompatLoadingForDrawables"})
     @Override
@@ -42,7 +46,7 @@ public class book_pkl_page extends AppCompatActivity implements View.OnClickList
 
         Bundle bundle = getIntent().getExtras();
         pkl_name = bundle.getString("pkl_name");
-        String pkl_position = bundle.getString("pkl_position");
+        pkl_position = bundle.getString("pkl_position");
         TextView tv_pkl_name = findViewById(R.id.tv_pkl_name);
         tv_pkl_name.setText(pkl_name);
         tv_show_remain_num = findViewById(R.id.tv_show_remain_num);
@@ -109,58 +113,76 @@ public class book_pkl_page extends AppCompatActivity implements View.OnClickList
         * */
         switch (view.getId()){
             case R.id.iv_pkp_0:
+                iv_pkp_0.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info0 = iv_pkp_0.getTag().toString();
                 String[] tagInfo_arr0 = tag_info0.split("\\.");
                 if(tagInfo_arr0[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr0[3],tagInfo_arr0[4],tagInfo_arr0[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
 
                 break;
             case R.id.iv_pkp_1:
+                iv_pkp_1.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info1 = iv_pkp_1.getTag().toString();
                 String[] tagInfo_arr1 = tag_info1.split("\\.");
                 if(tagInfo_arr1[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr1[3],tagInfo_arr1[4],tagInfo_arr1[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
                 break;
             case R.id.iv_pkp_2:
+                iv_pkp_2.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info2 = iv_pkp_2.getTag().toString();
                 String[] tagInfo_arr2 = tag_info2.split("\\.");
                 if(tagInfo_arr2[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr2[3],tagInfo_arr2[4],tagInfo_arr2[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
                 break;
             case R.id.iv_pkp_3:
+                iv_pkp_3.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info3 = iv_pkp_3.getTag().toString();
                 String[] tagInfo_arr3 = tag_info3.split("\\.");
                 if(tagInfo_arr3[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr3[3],tagInfo_arr3[4],tagInfo_arr3[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
                 break;
             case R.id.iv_pkp_4:
+                iv_pkp_4.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info4 = iv_pkp_4.getTag().toString();
                 String[] tagInfo_arr4 = tag_info4.split("\\.");
                 if(tagInfo_arr4[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr4[3],tagInfo_arr4[4],tagInfo_arr4[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
                 break;
             case R.id.iv_pkp_5:
+                iv_pkp_5.setImageDrawable(getResources().getDrawable(R.drawable.book_page_pkp_selected_bg));
                 String tag_info5 = iv_pkp_5.getTag().toString();
                 String[] tagInfo_arr5 = tag_info5.split("\\.");
                 if(tagInfo_arr5[0].equals(0+"")){
                     showBookPopUpWindow(tagInfo_arr5[3],tagInfo_arr5[4],tagInfo_arr5[2],true);
+                    refreshBookPage();
                 }else{
                     Toast.makeText(book_pkl_page.this,"该车位已占用，请选择其他车位！",Toast.LENGTH_SHORT).show();
+                    refreshBookPage();
                 }
                 break;
         }
@@ -180,7 +202,24 @@ public class book_pkl_page extends AppCompatActivity implements View.OnClickList
                 try {
                     boolean book_state = conn.changePkpState(in_state_change_to,pkl_name,pkp_num,null,null,null);
                     if(book_state){
+                        Intent bookSuccessPage = new Intent(book_pkl_page.this,BookSuccessPage.class);
+                        Bundle bundle = new Bundle();
+                        // 停车位置
+                        bundle.putString("pkp_num",pkp_num);
+
+                        // 开始时间
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+                        String pkp_in_time =formatter.format(calendar.getTime()).toString();
+                        bundle.putString("pkp_in_time",pkp_in_time);
+
+                        // 停车场位置
+                        bundle.putString("pkl_position",pkl_position);
+
+                        // 页面跳转
+                        bookSuccessPage.putExtras(bundle);
                         Toast.makeText(book_pkl_page.this,"车位预定成功!",Toast.LENGTH_SHORT).show();
+                        startActivity(bookSuccessPage);
                         refreshBookPage();
                     }else{
                         Toast.makeText(book_pkl_page.this,"车位预定失败，请重试",Toast.LENGTH_SHORT).show();

@@ -13,4 +13,5 @@
     <color name="theme_blue">#FF6DABED</color>
     <color name="main_btm_selected_btn">#639AD3</color>
     <color name="mainpagebg">#FFFFFFFF</color>
+    <color name="pkp_selected_bg_color">#b0d1f5</color>
 </resources>

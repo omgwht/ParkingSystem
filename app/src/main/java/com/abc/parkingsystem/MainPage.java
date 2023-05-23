@@ -167,7 +167,6 @@ public class MainPage extends AppCompatActivity{
                                         Boolean show_popup_state = showPopUpWindow(pkl_name_str,pkl_position_str,pkp_remain_num);
                                         if(show_popup_state){
                                             msearchview.clearFocus();
-//                                            bottom_btn_1.setPressed(true);
                                         }
                                 }
                             }

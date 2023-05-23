@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@color/white">
     <RelativeLayout
+        android:id="@+id/re_layout_biggest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -36,7 +37,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/top_line_shape"
+            android:background="@drawable/book_page_imageview_bg"
             android:layout_alignTop="@+id/tv_show_remain_num"
             android:layout_marginTop="45dp"
             android:layout_marginLeft="60dp"
@@ -49,40 +50,64 @@
                     android:layout_height="wrap_content"
                     android:columnCount="3"
                     android:rowCount="4">
+
                     <ImageView
                         android:id="@+id/iv_pkp_0"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
-                        android:layout_columnWeight="1" />
+                        android:padding="20dp"
+                        android:layout_columnWeight="1"
+                        android:background="@drawable/book_page_pkp_iv_bg_rig_btm"/>
                     <ImageView
                         android:id="@+id/iv_pkp_1"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
-                        android:layout_columnWeight="1" />
+                        android:padding="20dp"
+                        android:layout_columnWeight="1"
+                        android:background="@drawable/book_page_pkp_iv_bg_rig_btm"/>
                     <ImageView
                         android:id="@+id/iv_pkp_2"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
-                        android:layout_columnWeight="1" />
+                        android:padding="20dp"
+                        android:layout_columnWeight="1"
+                        android:background="@drawable/book_page_pkp_iv_bg_btm"/>
                     <ImageView
                         android:id="@+id/iv_pkp_3"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
-                        android:layout_columnWeight="1" />
+                        android:padding="20dp"
+                        android:layout_columnWeight="1"
+                        android:background="@drawable/book_page_pkp_iv_bg_rig"/>
                     <ImageView
                         android:id="@+id/iv_pkp_4"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
-                        android:layout_columnWeight="1" />
+                        android:padding="20dp"
+                        android:layout_columnWeight="1"
+                        android:background="@drawable/book_page_pkp_iv_bg_rig"/>
                     <ImageView
                         android:id="@+id/iv_pkp_5"
                         android:layout_width="80dp"
                         android:layout_height="250dp"
+                        android:padding="20dp"
                         android:layout_columnWeight="1" />
+
+
                 </GridLayout>
             </ScrollView>
 
         </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="欢迎您慧停车!"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="650dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            tools:ignore="NotSibling" />
 
     </RelativeLayout>
 </LinearLayout>
