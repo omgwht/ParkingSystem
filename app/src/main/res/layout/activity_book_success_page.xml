@@ -191,7 +191,7 @@
         android:textColor="@color/black"
         android:clickable="true"
         android:id="@+id/download"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="84dp"
         android:textSize="22sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"

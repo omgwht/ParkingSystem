@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">ParkingSystem</string>
 
+    <string name="jifen">我的积分</string>
+    <string name="back">返回</string>
+    <string name="zero">0</string>
+    <string name="cheliangshimingrenzheng">车辆实名认证</string>
+    <string name="jifenn">积分</string>
+    <string name="details">详情</string>
+    <string name="nowjifen">当前积分</string>
+    <string name="geduan">|</string>
+    <string name="benyueguoqi">本月过期</string>
+    <string name="renwuhuanjifen">做任务换积分</string>
+    <string name="newuserszhuce">邀请新用户注册</string>
+    <string name="jia80jifen">＋80积分</string>
+    <string name="yaoqing">每邀请一个用户得80积分</string>
+    <string name="gofinish">去完成</string>
+    <string name="jia50jifen">＋50积分</string>
+    <string name="firstidentify">限首次车辆认证</string>
+    <string name="onlinejiaofei">线上缴费</string>
+    <string name="jia1jifen">＋1积分</string>
+    <string name="yiyuanyijifen">每缴费一元得1个积分</string>
+    <string name="spinner_prompt">车的型号</string>
 </resources>

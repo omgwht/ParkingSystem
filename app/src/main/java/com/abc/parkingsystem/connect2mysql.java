@@ -3,6 +3,9 @@ package com.abc.parkingsystem;
 import android.util.Log;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class connect2mysql {
 
@@ -116,6 +119,68 @@ public class connect2mysql {
         }else{
             return false;
         }
+    }
+
+    /*
+    * 根据车牌号获取我的车辆的停放信息
+    * */
+    public Map<String,String> getMyCarPositionThrowCarNum(String car_num) throws SQLException {
+        String sql = String.format("SELECT * FROM parkingport_info WHERE pkp_car_num = '%s'",car_num);
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        int count = 0;
+        while (rs.next()){
+            count++;
+        }
+        String pkl_name = null, pkp_num = null, pkp_in_time = null;
+        rs = statement.executeQuery(sql);
+        for(int i = 0; rs.next(); i++){
+            pkl_name = rs.getString("pkl_name");
+            pkp_num = rs.getString("pkp_num");
+            pkp_in_time = rs.getString("pkp_in_time");
+        }
+        Map<String,String> res_map = new HashMap<String,String>();
+        res_map.put("pkl_name",pkl_name);
+        res_map.put("pkp_num",pkp_num);
+        res_map.put("pkp_in_time",pkp_in_time);
+
+        Log.d("map中的数据","数据长度："+res_map.size()+
+                ",名："+res_map.get("pkl_name")+"位："+res_map.get("pkp_num")+"时："+res_map.get("pkp_in_time"));
+        return res_map;
+    }
+
+    /*
+    * 获取车友圈帖子信息
+    * */
+    public ArrayList<MyPostInfo> getPostInfo() throws SQLException {
+        // 所有帖子信息的数组集合
+//        MyPostInfo[] myPostInfos = new MyPostInfo[100];
+        ArrayList<MyPostInfo> myPostInfos = new ArrayList<MyPostInfo>();
+
+        String user_name = null;
+        String post_info = null;
+
+
+        Log.i("执行","执行到了这里");
+
+
+        String sql = "SELECT * FROM post_info";
+
+        if(connection==null){
+            return null;
+        }
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        while(rs.next()){
+            user_name = rs.getString("post_user_name");
+            Log.d("用户名",user_name+"");
+            post_info = rs.getString("post_detail_text");
+            Log.d("帖子内容",post_info+"");
+            MyPostInfo myPostInfo = new MyPostInfo(user_name,post_info);
+            myPostInfos.add(myPostInfo);
+        }
+        Log.d("集合长度",myPostInfos.size()+"");
+        return myPostInfos;
     }
 
 }

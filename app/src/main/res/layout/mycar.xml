@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/re"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:background="@drawable/re"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="5dp"
+
+        >
+
+    </ImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        >
+
+        <TextView
+            android:id="@+id/num"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="车牌号"
+            android:layout_marginLeft="240dp"
+            android:textSize="12sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/type"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="型号"
+            android:layout_marginLeft="230dp"
+            android:textSize="12sp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="51dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="312dp" />
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存信息"
+            android:textSize="12sp"
+            android:layout_marginStart="20dp"
+            android:background="#87BDFA"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="115dp"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停车场："
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="40dp"/>
+            <TextView
+                android:id="@+id/tv_park"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="暂无"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停车位置："
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="40dp"/>
+            <TextView
+                android:id="@+id/tv_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="暂无"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停车时间："
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="40dp"/>
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="暂无"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="180dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="车辆保单信息"
+            android:layout_marginLeft="100dp"
+            android:textSize="20dp">
+        </TextView>
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="车辆安全信息"
+            android:layout_marginLeft="100dp"
+            android:textSize="20dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="车辆检修信息"
+            android:layout_marginLeft="100dp"
+            android:textSize="20dp"
+            >
+        </TextView>
+    </LinearLayout>
+</LinearLayout>

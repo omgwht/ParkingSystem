@@ -13,5 +13,19 @@
     <color name="theme_blue">#FF6DABED</color>
     <color name="main_btm_selected_btn">#639AD3</color>
     <color name="mainpagebg">#FFFFFFFF</color>
+
+
     <color name="pkp_selected_bg_color">#b0d1f5</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="c333333">#333333</color>
+    <color name="ccccccc">#CCCCCC</color>
+    <color name="c666666">#666666</color>
+    <color name="c1296db">#1296DB</color>
+    <color name="lightGrey">#D3D3D3</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="c0f6eff">#0F6EFF</color>
+    <color name="cd2e4f7">#D2E4F7</color>
 </resources>

@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BookSuccessPage extends AppCompatActivity implements View.OnClickListener {
-    boolean save=true;
+    boolean save = true;
     private TextView Download;
     private EditText Name;
     private ImageView Quit;

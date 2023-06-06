@@ -69,36 +69,36 @@ public class MainPage extends AppCompatActivity{
         re_layout_bottom = (RelativeLayout) findViewById(R.id.re_layout_bottom);
 
         bottomNavigationView = findViewById(R.id.btnNavView);
+        bottomNavigationView.setSelectedItemId(R.id.ibtn_bottom_1);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ibtn_bottom_1:
+                        // 首页
                         Log.i("INFO","底部导航栏1点击成功");
                         return true;
                     case R.id.ibtn_bottom_2:
+                        // 我的车辆
+                        Intent intent_car = new Intent(getApplicationContext(),Car.class);
+                        startActivity(intent_car);
                         Log.i("INFO","底部导航栏2点击成功");
                         return true;
                     case R.id.ibtn_bottom_3:
+                        // 车友圈
+                        Intent intent_friendCircle = new Intent(getApplicationContext(),FriendCircleMain.class);
+                        startActivity(intent_friendCircle);
                         Log.i("INFO","底部导航栏3点击成功");
                         return true;
                     case R.id.ibtn_bottom_4:
                         Log.i("INFO","底部导航栏4点击成功");
+                        Intent intent_mine = new Intent(getApplicationContext(),Lastwork.class);
+                        startActivity(intent_mine);
                         return true;
                 }
                 return false;
             }
         });
-        // 设置底部第一个按钮选中状态
-//        bottom_btn_1 = findViewById(R.id.ibtn_bottom_1);
-//        bottom_btn_2 = findViewById(R.id.ibtn_bottom_2);
-//        bottom_btn_3 = findViewById(R.id.ibtn_bottom_3);
-//        bottom_btn_4 = findViewById(R.id.ibtn_bottom_4);
-//        bottom_btn_1.setPressed(true);
-//        bottom_btn_1.setOnClickListener(this);
-//        bottom_btn_2.setOnClickListener(this);
-//        bottom_btn_3.setOnClickListener(this);
-//        bottom_btn_4.setOnClickListener(this);
         MapView mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         AMap aMap = mapView.getMap();
@@ -110,7 +110,30 @@ public class MainPage extends AppCompatActivity{
         aMap.setMyLocationEnabled(true);
         LatLng latLng = new LatLng(39.906901,116.397972);
 
+
+        //marker的点击事件
+        AMap.OnMarkerClickListener markerClickListener = new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String marker_title = marker.getTitle();
+                String[] pkl_info = marker_title.split(",");
+                // 添加弹窗
+                String sql = String.format("SELECT COUNT(*) FROM parkingport_info WHERE pkl_name='%s' AND pkp_state=0",pkl_info[0]);
+                try {
+                    int pkp_remain_num = conn.getPkpRemainNum(sql);
+                    showPopUpWindow(pkl_info[0],pkl_info[1],pkp_remain_num);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        };
+
+
         final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("Mine0停车场").snippet("北京市西城区西长安街1号"));
+        marker.setTitle("Mine0停车场,北京市西城区西长安街1号");
+
+
         try {
             String sql = "SELECT * FROM parkinglot_info";
             conn = new connect2mysql();
@@ -127,6 +150,7 @@ public class MainPage extends AppCompatActivity{
             e.printStackTrace();
         }
         msearchview = findViewById(R.id.msearchView);
+        msearchview.clearFocus();
         msearchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -186,7 +210,17 @@ public class MainPage extends AppCompatActivity{
 
     }
 
-//    @Override
+    @SuppressLint("ResourceType")
+    @Override
+    protected void onResume(){
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.ibtn_bottom_1);
+        msearchview.clearFocus();
+
+    }
+
+
+    //    @Override
 //    public void onClick(View view) {
 ////        switch (view.getId()){
 ////            case R.id.ibtn_bottom_1:
