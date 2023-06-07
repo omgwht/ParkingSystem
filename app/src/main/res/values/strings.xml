@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">ParkingSystem</string>
-
+    <string name="app_name">慧停车</string>
     <string name="jifen">我的积分</string>
     <string name="back">返回</string>
     <string name="zero">0</string>
@@ -20,5 +19,4 @@
     <string name="onlinejiaofei">线上缴费</string>
     <string name="jia1jifen">＋1积分</string>
     <string name="yiyuanyijifen">每缴费一元得1个积分</string>
-    <string name="spinner_prompt">车的型号</string>
 </resources>

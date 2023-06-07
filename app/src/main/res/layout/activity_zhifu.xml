@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btn11"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:background="@color/white"
+        android:text="20元"/>
+    <Button
+        android:id="@+id/btn12"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:background="@color/white"
+        android:text="30元"/>
+    <Button
+        android:id="@+id/btn13"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:background="@color/white"
+        android:text="50元"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn21"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+
+            android:background="@color/white"
+            android:text="100元"/>
+        <Button
+            android:id="@+id/btn22"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@color/white"
+            android:text="200元"/>
+        <Button
+            android:id="@+id/btn23"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@color/white"
+            android:text="500元"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/shuru"
+        android:layout_margin="30dp"
+        android:phoneNumber="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="自定义交费: 请输入金额"/>
+
+
+        <Button
+            android:id="@+id/sure"
+            android:layout_width="match_parent"
+            android:text="确定支付"
+            android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:text="取消支付"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

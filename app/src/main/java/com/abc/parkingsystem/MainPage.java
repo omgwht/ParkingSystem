@@ -82,25 +82,29 @@ public class MainPage extends AppCompatActivity{
                         // 我的车辆
                         Intent intent_car = new Intent(getApplicationContext(),Car.class);
                         startActivity(intent_car);
+                        finish();
                         Log.i("INFO","底部导航栏2点击成功");
                         return true;
                     case R.id.ibtn_bottom_3:
                         // 车友圈
                         Intent intent_friendCircle = new Intent(getApplicationContext(),FriendCircleMain.class);
                         startActivity(intent_friendCircle);
+
                         Log.i("INFO","底部导航栏3点击成功");
                         return true;
                     case R.id.ibtn_bottom_4:
                         Log.i("INFO","底部导航栏4点击成功");
-                        Intent intent_mine = new Intent(getApplicationContext(),Lastwork.class);
+                        Intent intent_mine = new Intent(getApplicationContext(),Mine.class);
                         startActivity(intent_mine);
+                        finish();
                         return true;
                 }
                 return false;
             }
         });
+
         MapView mapView = (MapView) findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
+        mapView.onCreate(savedInstanceState);
         AMap aMap = mapView.getMap();
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.showMyLocation(true);
@@ -109,30 +113,68 @@ public class MainPage extends AppCompatActivity{
         aMap.getUiSettings().setMyLocationButtonEnabled(true);
         aMap.setMyLocationEnabled(true);
         LatLng latLng = new LatLng(39.906901,116.397972);
-
+        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("Mine0停车场").snippet("北京市西城区西长安街1号"));
 
         //marker的点击事件
         AMap.OnMarkerClickListener markerClickListener = new AMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                String marker_title = marker.getTitle();
-                String[] pkl_info = marker_title.split(",");
-                // 添加弹窗
-                String sql = String.format("SELECT COUNT(*) FROM parkingport_info WHERE pkl_name='%s' AND pkp_state=0",pkl_info[0]);
-                try {
-                    int pkp_remain_num = conn.getPkpRemainNum(sql);
-                    showPopUpWindow(pkl_info[0],pkl_info[1],pkp_remain_num);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                return false;
+
+                Log.d("标记点Title",""+marker.getTitle()+",id为："+marker.getId());
+//                if (marker.isInfoWindowShown()) {
+//                    marker.hideInfoWindow();
+//                } else {
+//                    marker.showInfoWindow();
+//                }
+                marker.showInfoWindow();
+                return true; // 返回:true 表示点击marker 后marker 不会移动到地图中心；返回false 表示点击marker 后marker 会自动移动到地图中心
             }
         };
 
 
-        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("Mine0停车场").snippet("北京市西城区西长安街1号"));
-        marker.setTitle("Mine0停车场,北京市西城区西长安街1号");
+        AMap.InfoWindowAdapter mWindowAdapter = new AMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+//                View MyInfoContent = getLayoutInflater().inflate(R.layout.parkinginfo_popupwindow,null);
+                View MyInfoContent = null;
+                try {
+                    render(marker,MyInfoContent);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return MyInfoContent;
+            }
 
+            @Override
+            public View getInfoContents(Marker marker) {
+//                View MyInfoContent = getLayoutInflater().inflate(R.layout.parkinginfo_popupwindow,null);
+                View MyInfoContent = null;
+//                try {
+//                    render(marker,MyInfoContent);
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+                return MyInfoContent;
+            }
+
+            private void render(Marker marker, View view) throws SQLException {
+                int pkp_remain_num = 0;
+                String pkl_name_str = null;
+                pkp_remain_num = conn.getPkpRemainNum("SELECT COUNT(*) FROM parkingport_info WHERE pkl_name='"+pkl_name_str+"' AND pkp_state=0");
+
+                String pkl_name = marker.getTitle();
+                String pkl_position = marker.getSnippet();
+
+                String sql = "SELECT * FROM parkinglot_info WHERE parkinglot_name LIKE '%"+pkl_name+"%' OR parkinglot_position LIKE '%"+pkl_position+"%'";
+                ParkingInfoDoubleArray parkingInfoDoubleArray = conn.getSearchParkingResult(sql);
+                titles = parkingInfoDoubleArray.getNameArray();
+                positions = parkingInfoDoubleArray.getPositionArray();
+
+                showPopUpWindow(pkl_name,pkl_position,pkp_remain_num);
+            }
+        };
+        aMap.setInfoWindowAdapter(mWindowAdapter);
+        aMap.setOnMarkerClickListener(markerClickListener);
 
         try {
             String sql = "SELECT * FROM parkinglot_info";
